@@ -139,6 +139,7 @@
       font-size: 14px;
       font-weight: 700;
       opacity: .85;
+      text-transform: capitalize;
     }
 
     @keyframes pop {
@@ -152,26 +153,26 @@
   <canvas id="confettiCanvas"></canvas>
 
   <main class="card">
-    <!-- CHANGE 1: MAIN IMAGE -->
-    <img class="art" src="img/foto-juntos.jpg" alt="Us together" />
+    <!-- MAIN IMAGE (only shown before clicking YES) -->
+    <img class="art" id="mainPhoto" src="img/foto-juntos.jpg" alt="Us together" />
 
-    <h1>nirali will you be my valentine?</h1>
+    <!-- CHANGE: "nirali" -> "My bebecito" -->
+    <h1>My bebecito will you be my valentine?</h1>
 
     <section class="button-zone" id="zone">
       <button id="yesBtn">Yes</button>
       <button id="noBtn">No</button>
     </section>
 
-    <!-- HINT -->
     <div class="hint" id="hint">“No” seems a bit shy 😈</div>
 
     <section class="result" id="result">
       <h2>YAY! 🎉</h2>
 
-      <!-- CHANGE 2: TEXT AFTER YES -->
+      <!-- CHANGE: text in English -->
       <p class="voucher">
-        válido por desayuno de valentines
-        <small>rubens arepas</small>
+        Valid for a Valentine’s breakfast
+        <small>Rubens Arepas</small>
       </p>
 
       <img
@@ -188,6 +189,7 @@
     const noBtn = document.getElementById("noBtn");
     const result = document.getElementById("result");
     const hint = document.getElementById("hint");
+    const mainPhoto = document.getElementById("mainPhoto");
 
     /* ---------- CONFETTI ---------- */
     const confettiCanvas = document.getElementById("confettiCanvas");
@@ -283,7 +285,8 @@
     /* ---------- YES CLICK ---------- */
     yesBtn.addEventListener("click", () => {
       zone.style.display = "none";
-      hint.style.display = "none";     // HIDE THE HINT
+      hint.style.display = "none";
+      if (mainPhoto) mainPhoto.style.display = "none"; // HIDE PHOTO AFTER YES
       result.style.display = "block";
       resizeConfettiCanvas();
       fullScreenConfetti();
